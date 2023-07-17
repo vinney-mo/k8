@@ -78,7 +78,7 @@ class ProductControl extends Component {
     }
     
     componentDidMount(){
-        axios.get('http://localhost:5000/api/products')
+        axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/products`)
             .then(res =>{
                 console.log(res)
                 this.setState({
@@ -131,6 +131,7 @@ class ProductControl extends Component {
 
     // Method to handle adding a new product
     handleAddingNewProduct = (newProduct) =>{
+        console.log(process.env.REACT_APP_BACKEND_API_URL)
         // if (newProduct.photo === undefined){
         //     newProduct.photo = Default_image
         // }
@@ -157,14 +158,14 @@ class ProductControl extends Component {
         //     console.log(pair[0]+ ', ' + pair[1]); 
         // }       
         // console.log(...formData)
-        axios.post('http://localhost:5000/api/products', newProduct)
+        axios.post(`${process.env.REACT_APP_BACKEND_API_URL}/api/products`, newProduct)
             .then(res => console.log(res.data))
         this.setState({
             formVisibleOnPage: false
         })
     };
     handleDeletingProduct = (id) =>{
-        axios.delete('http://localhost:5000/api/products/'+id)
+        axios.delete(`${process.env.REACT_APP_BACKEND_API_URL}/api/products/${id}`)
             .then(res => console.log(res.data))
             .catch((error) =>{
                 console.log(error)
@@ -184,7 +185,7 @@ class ProductControl extends Component {
     }
     handleEditingProduct = (editedProduct) =>{
 
-        axios.put('http://localhost:5000/api/products/' + this.state.selectedProduct._id, editedProduct)
+        axios.put(`${process.env.REACT_APP_BACKEND_API_URL}/api/products/${this.state.selectedProduct._id}`, editedProduct)
             .then(res =>console.log(res.data))
         
         this.setState({
